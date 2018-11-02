@@ -1,13 +1,13 @@
 
     $(function() {
 
-        var donutData = genData();
-
+        var donutData = directEmailData();
+        debugger
         var donuts = new DonutCharts();
         donuts.create(donutData);
 
         $('#refresh-btn').on('click', function refresh() {
-            donuts.update(genData);
+            donuts.update(donutData);
         });
 
     });
@@ -15,13 +15,13 @@
 
     function DonutCharts() {
 
-        var charts = d3.select('#donut-charts');
+        let charts = d3.select('#donut-charts');
 
-        var chart_m,
+        let chart_m,
             chart_r,
             color = d3.scale.category20();
 
-        var getCatNames = function(dataset) {
+        let getCatNames = function(dataset) {
             var catNames = new Array();
 
             for (var i = 0; i < dataset[0].data.length; i++) {
@@ -80,7 +80,7 @@
                 }
             }
 
-            var donuts = d3.selectAll('.donut');
+            let donuts = d3.selectAll('.donut');
 
             // The circle displaying total data.
             donuts.append("svg:circle")
@@ -236,8 +236,11 @@
 
         this.create = function(dataset) {
             var $charts = $('#donut-charts');
+            console.log($charts.innerWidth())
             chart_m = $charts.innerWidth() / dataset.length / 2 * 0.14;
             chart_r = $charts.innerWidth() / dataset.length / 2 * 0.85;
+            console.log(`${chart_m}`)
+            console.log(`${chart_r}`)
 
             charts.append('svg')
                 .attr('class', 'legend')
@@ -280,26 +283,40 @@
     function directEmailData() {
         let dataset = new Array();
         let data = new Array();
-        
+
         let noResponse = Math.floor((Math.random() * 100) + 1)
         let pValue = (Math.random() * noResponse) + 1
         let nValue = noResponse - pValue
         let total = noResponse + pValue + nValue
         let days = (Math.random() * 7) + 1
         let attempts = (Math.random() * 3) + 1
-        data.push({
-            'noResponse': noResponse,
-            'pValue': pValue,
-            'nValue': nValue,
-            'days': days,
-            'attempts': attempts
-        })
-        
-        dataset.push({
-            'type': 'email', 
-            'data': data,
-            'total': total
-        })
+        let catagors = ['noResponse', 'pValue', 'nValue', 'days', 'attempts']
+        let valArr = [noResponse, pValue, nValue, days, attempts]
+        for (let j = 0; j < catagors.length; j++){
+             data.push({
+                'cat': catagors[j],
+                'val': valArr[j]
+            })
+        }
+        // data.push({
+        //     'responseTypes': {
+        //         'noResponse': noResponse,
+        //         'pValue': pValue,
+        //         'nValue': nValue
+        //     },
+        //     'days': days,
+        //     'attempts': attempts
+        // })
+        let types = ['Responses', 'Days', 'Attempts']
+        for (let i = 0; i < types.length; i++){
+            dataset.push({
+                'type': types[i], 
+                'data': data,
+                'unit': '',
+                'total': total
+            })
+        }
+        debugger
         return dataset;
     }
     function genData() {
