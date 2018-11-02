@@ -1,32 +1,35 @@
-var margin = {top: 60, right: 0, bottom: 0, left: 0};
+// import email from '/Users/josephrato/Desktop/RejectionEmail/db/emails.js'
+console.log(email)
+let margin = {top: 60, right: 0, bottom: 0, left: 0};
 
-var width = 600-margin.left-margin.right;
-var height = 600-margin.top - margin.bottom;
-var fullWidth = width + margin.left+margin.right;
-var fullHeight = height+margin.top+margin.bottom;
-var radius = Math.min(width, height) / 2;
+let width = 600-margin.left-margin.right;
+let height = 600-margin.top - margin.bottom;
+let fullWidth = width + margin.left+margin.right;
+let fullHeight = height+margin.top+margin.bottom;
+// console.log('width')
+let radius = Math.min(width, height) / 2;
 
-var color = d3.scaleOrdinal(d3.schemeCategory20b);
+let color = d3.scaleOrdinal(d3.schemeCategory20b);
 
-var svg = d3.select("#chart").append("svg")
+let svg = d3.select("#chart").append("svg")
     .attr("width", fullWidth)
     .attr("height", fullHeight);
 
-var g = svg.append("g")
+let g = svg.append("g")
     .attr("transform","translate(" + (fullWidth / 2) + "," + (fullHeight / 2) +")")
     .attr("class","chartGroup");
 
-var donutWidth = ( width / 4);
+let donutWidth = ( width / 4);
 
-var arc = d3.arc()
+let arc = d3.arc()
     .innerRadius(donutWidth)
     .outerRadius(radius);
 
-var pie = d3.pie()
+let pie = d3.pie()
     .value(function(d) { return d.count})
     .sort(null);
 
-var tooltip = d3.select('#chart')
+let tooltip = d3.select('#chart')
     .append('div')
     .attr('class','tooltip')
 
@@ -39,14 +42,14 @@ tooltip.append('div')
 
 
 
- d3.json('db/emails.json', function(error, dataset) {
-     console.log(dataset)
-          dataset.forEach(function(d) {
-            d.count = +d.count;
-            d.enabled = true;
-          });               
-
-var path = g.selectAll('path')
+ function graph_viewing(email) {
+    // dataset = Object.keys(email).map( idx => {
+    //     email[key].payload.body
+    // });
+    let dataset = email;
+    console.log(dataset)
+    console.log(email)
+let path = g.selectAll('path')
     .data(pie(dataset))
     .enter()
     .append('path')
@@ -57,15 +60,15 @@ var path = g.selectAll('path')
     .each(function(d){this._current = d;});
 
 path.on('mousemove', function(d){
-      var xposSub = document.getElementById("chart").getBoundingClientRect().left; 
-      var xpos = d3.event.x - xposSub + 20  
-      var ypos = d3.event.y    
+      let xposSub = document.getElementById("chart").getBoundingClientRect().left; 
+      let xpos = d3.event.x - xposSub + 20  
+      let ypos = d3.event.y    
       tooltip.style("left" ,xpos + "px")
       tooltip.style("top", ypos + "px")  
-    var total = d3.sum(dataset.map(function(d){
+    let total = d3.sum(dataset.map(function(d){
       return (d.enabled) ? d.count : 0;
     }));
-  var percent = Math.round(10000 * d.data.count / total) / 100;
+  let percent = Math.round(10000 * d.data.count / total) / 100;
   tooltip.select('.label').html(d.data.label);
   tooltip.select('.count').html(d.data.count);
   tooltip.select('.percent').html(percent + '%');
@@ -79,19 +82,19 @@ path.on('mouseout', function(d){
 
 });
    
-var legendRectSize = 18;
-var legendSpacing = 10; 
+let legendRectSize = 18;
+let legendSpacing = 10; 
 
-var legend = g.selectAll('.legend')
+let legend = g.selectAll('.legend')
     .data(color.domain()) 
     .enter()
         .append('g')
         .attr('class','legend')
         .attr('transform', function(d,i){
-            var height = legendRectSize + legendSpacing;
-            var offset = height * color.domain().length / 2;
-            var horz = -2 * legendRectSize;
-            var vert = i * height-offset;
+            let height = legendRectSize + legendSpacing;
+            let offset = height * color.domain().length / 2;
+            let horz = -2 * legendRectSize;
+            let vert = i * height-offset;
             return 'translate(' + horz + ',' + vert + ')';
         });
 
@@ -102,9 +105,9 @@ var legend = g.selectAll('.legend')
         .style('stroke',color)
 
         .on('click', function(label){
-        var rect = d3.select(this);
-  var enabled = true;
-  var totalEnabled = d3.sum(dataset.map(function(d) {
+        let rect = d3.select(this);
+  let enabled = true;
+  let totalEnabled = d3.sum(dataset.map(function(d) {
     return (d.enabled) ? 1 : 0;
   }));
 
@@ -126,7 +129,7 @@ var legend = g.selectAll('.legend')
   path.transition()
     .duration(750)
     .attrTween('d', function(d) {
-      var interpolate = d3.interpolate(this._current, d);
+      let interpolate = d3.interpolate(this._current, d);
       this._current = interpolate(0);
       return function(t) {
         return arc(interpolate(t));
@@ -142,4 +145,6 @@ legend.append('text')
   .attr('alignment-baseline','middle')
   .text(function(d) { return d; });
 
- });
+ };
+
+ graph_viewing(email);

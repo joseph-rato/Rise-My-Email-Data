@@ -1,15 +1,58 @@
+<!-- <!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+  <style>
+    body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0; }
+  </style>
+</head>
+
+<body>
+  <script>
+    var svg = d3.select("body").append("svg")
+      .attrs({"width": 960,
+      			  "height": 500,
+              "bgcolor": "black"})
+    
+    /*
+    var background = svg.append("rect")
+    		.attrs({
+          "width": "100%",
+          "height": "100%",
+          "fill": "black"
+        })
+        */
+
+    var ball = svg.append("circle")
+        .attrs({  // provided by selection-multi module
+          "r": 73,
+          "cx": 480,
+          "cy": 250
+          })
+        .style("fill", "#ffe41e");
+    
+  </script>
+</body> -->
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
     <title></title>
-    <!-- <script type="text/javascript" src="./bundle.js"></script> -->
-    <script type="text/javascript" src="/public/javascript/graph_donut.js"></script>
+     <script type="text/javascript" src="./bundle.js"></script> 
+    <link rel="stylesheet" href="./css/style.css">
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
+
+    <script type="text/javascript" src="../db/emails.js"></script>
+    <script type="text/javascript" src="/Users/josephrato/Desktop/RejectionEmail/public/javascripts/graph_donut.js"></script>
 
   </head>
   <body>
     <main id='main'></main>
     <h1>HELPPP</h1>
-    <div id="chart"></div>
+    <div id="chart" ></div>
   </body>
 </html>
