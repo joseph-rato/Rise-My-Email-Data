@@ -15,7 +15,7 @@ const TOKEN_PATH = 'token.json';
 fs.readFile('credentials.json', (err, content) => {
   if (err) return console.log('Error loading client secret file:', err);
   // Authorize a client with credentials, then call the Gmail API.
-  authorize(JSON.parse(content), listLabels);
+  authorize(JSON.parse(content), listLabels());
 });
 
 /**
@@ -75,7 +75,7 @@ function getNewToken(oAuth2Client, callback) {
  */
 function listLabels(auth) {
   const gmail = google.gmail({version: 'v1', auth});
-  gmail.users.labels.list({
+  gmail.users.messages.list({
     userId: 'me',
   }, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
@@ -90,6 +90,30 @@ function listLabels(auth) {
     }
   });
 }
+// function listMessages(auth, query, callback) {
+//     const gmail = google.gmail({version: 'v1', auth})
+//     let getPageOfMessages = function(request, result) {
+//       request.execute(function(resp) {
+//         result = result.concat(resp.messages);
+//         let nextPageToken = resp.nextPageToken;
+//         if (nextPageToken) {
+//           request = gmail.users.messages.list({
+//             'userId': auth,
+//             'pageToken': nextPageToken,
+//             'q': query
+//           });
+//           getPageOfMessages(request, result);
+//         } else {
+//           callback(result);
+//         }
+//       });
+//     };
+//     let initialRequest = gmail.users.messages.list({
+//       'userId': auth,
+//       'q': query
+//     });
+//     getPageOfMessages(initialRequest, []);
+//   }
 
 app.listen(PORT, () => {
     console.log(__dirname);

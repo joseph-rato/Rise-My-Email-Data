@@ -22,6 +22,7 @@
     "node-fetch": "^2.2.0",
     "node-sass": "^4.9.4",
     "sass-loader": "^7.1.0",
+    "sentiment": "^5.0.1",
     "webpack": "^4.23.1"
   },
   "devDependencies": {
