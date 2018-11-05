@@ -3,8 +3,8 @@
 
         let donutData = directEmailData();
         let donuts = new DonutCharts();
+        console.log('hello')
         donuts.create(donutData);
-
         $('#refresh-btn').on('click', function refresh() {
             let newData = directEmailData()
             donuts.update(newData);
