@@ -1,9 +1,9 @@
 
     $(function() {
 
-        var donutData = directEmailData();
+        let donutData = directEmailData();
         debugger
-        var donuts = new DonutCharts();
+        let donuts = new DonutCharts();
         donuts.create(donutData);
 
         $('#refresh-btn').on('click', function refresh() {
@@ -22,17 +22,20 @@
             color = d3.scale.category20();
 
         let getCatNames = function(dataset) {
-            var catNames = new Array();
+            
+            let catNames = new Array();
 
-            for (var i = 0; i < dataset[0].data.length; i++) {
+            for (let i = 0; i < dataset[0].data.length; i++) {
                 catNames.push(dataset[0].data[i].cat);
             }
 
             return catNames;
         }
 
-        var createLegend = function(catNames) {
-            var legends = charts.select('.legend')
+        let createColorLegend
+
+        let createLegend = function(catNames) {
+            let legends = charts.select('.legend')
                             .selectAll('g')
                                 .data(catNames)
                             .enter().append('g')
@@ -55,9 +58,9 @@
                 });
         }
 
-        var createCenter = function(pie) {
+        let createCenter = function(pie) {
 
-            var eventObj = {
+            let eventObj = {
                 'mouseover': function(d, i) {
                     d3.select(this)
                         .transition()
@@ -73,7 +76,7 @@
                 },
 
                 'click': function(d, i) {
-                    var paths = charts.selectAll('.clicked');
+                    let paths = charts.selectAll('.clicked');
                     pathAnim(paths, 0);
                     paths.classed('clicked', false);
                     resetAllCenterText();
@@ -97,6 +100,14 @@
                         return d.type;
                     });
             donuts.append('text')
+                .attr('class', 'center-txt catagory')
+                .attr('y', chart_r * .36)
+                .attr('text-anchor', 'middle')
+                .style('font-weight', 'bold')
+                .text(function() {
+                    return '';
+                 });
+            donuts.append('text')
                     .attr('class', 'center-txt value')
                     .attr('text-anchor', 'middle');
             donuts.append('text')
@@ -106,15 +117,20 @@
                     .style('fill', '#A2A2A2');
         }
 
-        var setCenterText = function(thisDonut) {
-            var sum = d3.sum(thisDonut.selectAll('.clicked').data(), function(d) {
+        let setCenterText = function(thisDonut) {
+            let sum = d3.sum(thisDonut.selectAll('.clicked').data(), function(d) {
                 return d.data.val;
             });
 
+            thisDonut.select('.catagory')
+                .text(function() {
+                    return '';
+                })
+
             thisDonut.select('.value')
                 .text(function(d) {
-                    return (sum)? sum.toFixed(1) + d.unit
-                                : d.total.toFixed(1) + d.unit;
+                    return (sum)? sum + ' ' + d.unit
+                                : d.total + ' ' + d.unit;
                 });
             thisDonut.select('.percentage')
                 .text(function(d) {
@@ -123,16 +139,16 @@
                 });
         }
 
-        var resetAllCenterText = function() {
+        let resetAllCenterText = function() {
             charts.selectAll('.value')
                 .text(function(d) {
-                    return d.total.toFixed(1) + d.unit;
+                    return d.total + ' ' + d.unit;
                 });
             charts.selectAll('.percentage')
                 .text('');
         }
 
-        var pathAnim = function(path, dir) {
+        let pathAnim = function(path, dir) {
             switch(dir) {
                 case 0:
                     path.transition()
@@ -154,16 +170,23 @@
             }
         }
 
-        var updateDonut = function() {
+        let updateDonut = function() {
 
-            var eventObj = {
+            let eventObj = {
 
                 'mouseover': function(d, i, j) {
                     pathAnim(d3.select(this), 1);
 
-                    var thisDonut = charts.select('.type' + j);
+                    let thisDonut = charts.select('.type' + j);
+                    // debugger 
+
+                   thisDonut.select('.catagory').text(function() {
+                       return d.data.cat;
+                   });
+                    
+
                     thisDonut.select('.value').text(function(donut_d) {
-                        return d.data.val.toFixed(1) + donut_d.unit;
+                        return d.data.val + ' ' + donut_d.unit;
                     });
                     thisDonut.select('.percentage').text(function(donut_d) {
                         return (d.data.val/donut_d.total*100).toFixed(2) + '%';
@@ -171,23 +194,23 @@
                 },
                 
                 'mouseout': function(d, i, j) {
-                    var thisPath = d3.select(this);
+                    let thisPath = d3.select(this);
                     if (!thisPath.classed('clicked')) {
                         pathAnim(thisPath, 0);
                     }
-                    var thisDonut = charts.select('.type' + j);
+                    let thisDonut = charts.select('.type' + j);
                     setCenterText(thisDonut);
                 },
 
                 'click': function(d, i, j) {
-                    var thisDonut = charts.select('.type' + j);
+                    let thisDonut = charts.select('.type' + j);
 
                     if (0 === thisDonut.selectAll('.clicked')[0].length) {
                         thisDonut.select('circle').on('click')();
                     }
 
-                    var thisPath = d3.select(this);
-                    var clicked = thisPath.classed('clicked');
+                    let thisPath = d3.select(this);
+                    let clicked = thisPath.classed('clicked');
                     pathAnim(thisPath, ~~(!clicked));
                     thisPath.classed('clicked', !clicked);
 
@@ -195,13 +218,13 @@
                 }
             };
 
-            var pie = d3.layout.pie()
+            let pie = d3.layout.pie()
                             .sort(null)
                             .value(function(d) {
                                 return d.val;
                             });
 
-            var arc = d3.svg.arc()
+            let arc = d3.svg.arc()
                             .innerRadius(chart_r * 0.7)
                             .outerRadius(function() {
                                 return (d3.select(this).classed('clicked'))? chart_r * 1.08
@@ -209,7 +232,8 @@
                             });
 
             // Start joining data with paths
-            var paths = charts.selectAll('.donut')
+            // the selectAll gets me three graphs need to select the specific of those to do different thigns toæ
+            let paths = charts.selectAll('.donut')
                             .selectAll('path')
                             .data(function(d, i) {
                                 return pie(d.data);
@@ -235,7 +259,7 @@
         }
 
         this.create = function(dataset) {
-            var $charts = $('#donut-charts');
+            let $charts = $('#donut-charts');
             console.log($charts.innerWidth())
             chart_m = $charts.innerWidth() / dataset.length / 2 * 0.14;
             chart_r = $charts.innerWidth() / dataset.length / 2 * 0.85;
@@ -248,7 +272,7 @@
                 .attr('height', 50)
                 .attr('transform', 'translate(0, -100)');
 
-            var donut = charts.selectAll('.donut')
+            let donut = charts.selectAll('.donut')
                             .data(dataset)
                         .enter().append('svg:svg')
                             .attr('width', (chart_r + chart_m) * 2)
@@ -267,7 +291,7 @@
     
         this.update = function(dataset) {
             // Assume no new categ of data enter
-            var donut = charts.selectAll(".donut")
+            let donut = charts.selectAll(".donut")
                         .data(dataset);
 
             updateDonut();
@@ -275,76 +299,71 @@
     }
 
 
-    /*
-     * Returns a json-like object.
-     */
-
+    // will need to transl
     //  might need the positive and negative responses to be on a spread sheet
     function directEmailData() {
         let dataset = new Array();
         let data = new Array();
 
         let noResponse = Math.floor((Math.random() * 100) + 1)
-        let pValue = (Math.random() * noResponse) + 1
+        let pValue = Math.floor((Math.random() * noResponse) + 1)
         let nValue = noResponse - pValue
         let total = noResponse + pValue + nValue
-        let days = (Math.random() * 7) + 1
-        let attempts = (Math.random() * 3) + 1
-        let catagors = ['noResponse', 'pValue', 'nValue', 'days', 'attempts']
-        let valArr = [noResponse, pValue, nValue, days, attempts]
+        let resTotal = pValue + nValue 
+        
+
+        function randombetween(min, max){
+            return Math.floor(Math.random()*(max - min + 1) + min)
+        }
+        let day1 = randombetween(1, resTotal - 7)
+        let day2 = randombetween(1, resTotal - 6 - day1)
+        let day3 = randombetween(1, resTotal - 5 - day1 - day2)
+        let day4 = randombetween(1, resTotal - 4 - day1 - day2 - day3)
+        let day5 = randombetween(1, resTotal - 3 - day1 - day2 - day3 - day4 )
+        let day6 = randombetween(1, resTotal - 2 - day1 - day2 - day3 - day4 - day5)
+        let day7 = resTotal - day1 - day2 - day3 - day4 - day5 - day6
+
+        attempt1 = randombetween(1, resTotal - 3)
+        attempt3 = randombetween(1, resTotal - 2 - attempt1)
+        attempt2 = resTotal - attempt3 - attempt1
+        let catagors = ['no response', 'positive', 'rejection', 'first day', 'second day',
+         'third day', 'fourth day', 'fifth day', 'sixth day', 'seventh day', 
+         'first attempt', 'second attempt', 'third attempt']
+        let valArr = [noResponse, pValue, nValue, day1, day2, day3, day4, day5, day6, day7, 
+            attempt1, attempt2, attempt3]
         for (let j = 0; j < catagors.length; j++){
              data.push({
                 'cat': catagors[j],
                 'val': valArr[j]
             })
         }
-        // data.push({
-        //     'responseTypes': {
-        //         'noResponse': noResponse,
-        //         'pValue': pValue,
-        //         'nValue': nValue
-        //     },
-        //     'days': days,
-        //     'attempts': attempts
-        // })
+
         let types = ['Responses', 'Days', 'Attempts']
         for (let i = 0; i < types.length; i++){
-            dataset.push({
-                'type': types[i], 
-                'data': data,
-                'unit': '',
-                'total': total
-            })
+            if (types[i] === 'Responses') {
+                dataset.push({
+                    'type': types[i], 
+                    'data': data.slice(0, 3),
+                    'unit': 'emails',
+                    'total': total
+                }) 
+            } else if (types[i] === 'Days') {
+                dataset.push({
+                    'type': types[i], 
+                    'data': data.slice(3, 10),
+                    'unit': 'times',
+                    'total': resTotal
+                })  
+            } else if (types[i] === 'Attempts') {
+                dataset.push({
+                    'type': types[i], 
+                    'data': data.slice(10),
+                    'unit': 'times',
+                    'total': resTotal
+                })  
+            }
         }
         debugger
         return dataset;
     }
-    function genData() {
-        var type = ['Users', 'Avg Upload', 'Avg Files Shared'];
-        var unit = ['M', 'GB', ''];
-        var cat = ['Google Drive', 'Dropbox', 'iCloud', 'OneDrive', 'Box'];
-
-        var dataset = new Array();
-
-        for (var i = 0; i < type.length; i++) {
-            var data = new Array();
-            var total = 0;
-
-            for (var j = 0; j < cat.length; j++) {
-                var value = Math.random()*10*(3-i);
-                total += value;
-                data.push({
-                    "cat": cat[j],
-                    "val": value
-                });
-            }
-
-            dataset.push({
-                "type": type[i],
-                "unit": unit[i],
-                "data": data,
-                "total": total
-            });
-        }
-        return dataset;
-    }
+   
