@@ -1,39 +1,4 @@
-<!-- <!DOCTYPE html>
-<head>
-  <meta charset="utf-8">
-  <script src="https://d3js.org/d3.v4.min.js"></script>
-  <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
-  <style>
-    body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0; }
-  </style>
-</head>
 
-<body>
-  <script>
-    var svg = d3.select("body").append("svg")
-      .attrs({"width": 960,
-      			  "height": 500,
-              "bgcolor": "black"})
-    
-    /*
-    var background = svg.append("rect")
-    		.attrs({
-          "width": "100%",
-          "height": "100%",
-          "fill": "black"
-        })
-        */
-
-    var ball = svg.append("circle")
-        .attrs({  // provided by selection-multi module
-          "r": 73,
-          "cx": 480,
-          "cy": 250
-          })
-        .style("fill", "#ffe41e");
-    
-  </script>
-</body> -->
 
 <!DOCTYPE html>
 <html>
@@ -41,56 +6,37 @@
     <meta charset="utf-8">
     <title></title>
      <script type="text/javascript" src="./bundle.js"></script> 
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="/Users/josephrato/Desktop/RejectionEmail/public/css/style.css">
 
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="https://d3js.org/d3-selection-multi.v1.min.js"></script>
 
     <script type="text/javascript" src="../db/emails.js"></script>
-    <script type="text/javascript" src="/Users/josephrato/Desktop/RejectionEmail/public/javascripts/graph_mydonut.js"></script>
+    <script type="text/javascript" src="./javascripts/graph_mydonut.js"></script>
 
   </head>
-  <style type="text/css">
-    body {
-        font-size: 100%;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        width: 960px;
-    }
-    #refresh-btn {
-        float: right;
-        font-size: 12px;
-        border-radius: 0;
-    }
-    </style>    
+     
   <body>
-    <button type="button" id="refresh-btn">Refresh data</button>
-    <div id="donut-charts"></div>
-    <h1>helppp</h1>
-    <div id="chart" ></div>
+    <div class="everything">
+      <div class="navbar">
+          <button type="button" id="refresh-btn">Refresh data</button>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/joseph-rato">Linkedin</a>
+          <a href="">Github</a>
+        </div>
+      </div>
+      <div class="main-content">
+        <h1 class="welcome-headline">Hello Manny</h1>
+        <div class="chart-section">
+          <h3 class="section-title">Application Stats:</h3>
+          <div id="donut-charts"></div>
+        </div>
+        <div class="to-do-section">
+          <h3 class="section-title">To do list</h3>
+          <a class="link-to-do" href="https://tango-app.herokuapp.com/#/splash">To the Tango App</a>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
-<!-- <!DOCTYPE html>
-<meta charset="utf-8">
-<style type="text/css">
-    body {
-        font-size: 100%;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        width: 960px;
-    }
-    #refresh-btn {
-        float: right;
-        font-size: 12px;
-        border-radius: 0;
-    }
-</style>
-<body>
-    <button type="button" id="refresh-btn">Refresh data</button>
-    <div id="donut-charts"></div>
-
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script>
-
-    </script>
-</body> -->

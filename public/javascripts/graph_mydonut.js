@@ -2,39 +2,41 @@
     $(function() {
 
         let donutData = directEmailData();
-        debugger
         let donuts = new DonutCharts();
         donuts.create(donutData);
 
         $('#refresh-btn').on('click', function refresh() {
-            donuts.update(donutData);
+            let newData = directEmailData()
+            donuts.update(newData);
         });
-
+    
     });
+    
     
 
     function DonutCharts() {
 
         let charts = d3.select('#donut-charts');
-
+        let holyData
+        let selectedData = new Array();
         let chart_m,
             chart_r,
             color = d3.scale.category20();
 
-        let getCatNames = function(dataset) {
+        let getCatNames = function(cat) {
             
             let catNames = new Array();
-
-            for (let i = 0; i < dataset[0].data.length; i++) {
-                catNames.push(dataset[0].data[i].cat);
+            for (let i = 0; i < holyData.length; i++) {
+                for (let j = 0; j < holyData[i].data.length; j++)
+                catNames.push(holyData[i].data[j].cat);
             }
-
-            return catNames;
+            let idx = catNames.findIndex((el) => el === cat)
+            return idx;
         }
 
-        let createColorLegend
 
         let createLegend = function(catNames) {
+            
             let legends = charts.select('.legend')
                             .selectAll('g')
                                 .data(catNames)
@@ -47,14 +49,17 @@
                 .attr('class', 'legend-icon')
                 .attr('r', 6)
                 .style('fill', function(d, i) {
-                    return color(i);
+                    let colorI = getCatNames(d)
+                    return color(colorI);
                 });
-    
+            
             legends.append('text')
                 .attr('dx', '1em')
                 .attr('dy', '.3em')
                 .text(function(d) {
+                    
                     return d;
+                    
                 });
         }
 
@@ -103,7 +108,6 @@
                 .attr('class', 'center-txt catagory')
                 .attr('y', chart_r * .36)
                 .attr('text-anchor', 'middle')
-                .style('font-weight', 'bold')
                 .text(function() {
                     return '';
                  });
@@ -178,8 +182,7 @@
                     pathAnim(d3.select(this), 1);
 
                     let thisDonut = charts.select('.type' + j);
-                    // debugger 
-
+                                    
                    thisDonut.select('.catagory').text(function() {
                        return d.data.cat;
                    });
@@ -204,15 +207,16 @@
 
                 'click': function(d, i, j) {
                     let thisDonut = charts.select('.type' + j);
-
                     if (0 === thisDonut.selectAll('.clicked')[0].length) {
                         thisDonut.select('circle').on('click')();
                     }
-
+                    
                     let thisPath = d3.select(this);
                     let clicked = thisPath.classed('clicked');
                     pathAnim(thisPath, ~~(!clicked));
                     thisPath.classed('clicked', !clicked);
+                    selectedData.push(d.data.cat)
+                    createLegend(selectedData);
 
                     setCenterText(thisDonut);
                 }
@@ -231,8 +235,6 @@
                                                                            : chart_r;
                             });
 
-            // Start joining data with paths
-            // the selectAll gets me three graphs need to select the specific of those to do different thigns toæ
             let paths = charts.selectAll('.donut')
                             .selectAll('path')
                             .data(function(d, i) {
@@ -248,7 +250,8 @@
                 .append('svg:path')
                     .attr('d', arc)
                     .style('fill', function(d, i) {
-                        return color(i);
+                        let colorI = getCatNames(d.data.cat)
+                        return color(colorI);
                     })
                     .style('stroke', '#FFFFFF')
                     .on(eventObj)
@@ -259,6 +262,7 @@
         }
 
         this.create = function(dataset) {
+            holyData = dataset
             let $charts = $('#donut-charts');
             console.log($charts.innerWidth())
             chart_m = $charts.innerWidth() / dataset.length / 2 * 0.14;
@@ -283,7 +287,7 @@
                             })
                             .attr('transform', 'translate(' + (chart_r+chart_m) + ',' + (chart_r+chart_m) + ')');
 
-            createLegend(getCatNames(dataset));
+            // createLegend(getCatNames(dataset));
             createCenter();
 
             updateDonut();
@@ -307,7 +311,7 @@
 
         let noResponse = Math.floor((Math.random() * 100) + 1)
         let pValue = Math.floor((Math.random() * noResponse) + 1)
-        let nValue = noResponse - pValue
+        let nValue = Math.floor((Math.random() * noResponse) + 1)
         let total = noResponse + pValue + nValue
         let resTotal = pValue + nValue 
         
@@ -326,7 +330,7 @@
         attempt1 = randombetween(1, resTotal - 3)
         attempt3 = randombetween(1, resTotal - 2 - attempt1)
         attempt2 = resTotal - attempt3 - attempt1
-        let catagors = ['no response', 'positive', 'rejection', 'first day', 'second day',
+        let catagors = ['no response', 'positive', 'negative', 'first day', 'second day',
          'third day', 'fourth day', 'fifth day', 'sixth day', 'seventh day', 
          'first attempt', 'second attempt', 'third attempt']
         let valArr = [noResponse, pValue, nValue, day1, day2, day3, day4, day5, day6, day7, 
@@ -363,7 +367,6 @@
                 })  
             }
         }
-        debugger
         return dataset;
     }
    
