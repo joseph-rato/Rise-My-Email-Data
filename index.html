@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+      <link rel="icon" href="db/assets/favicon.ico" type="image/x-icon">
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" type="text/css" href="./public/css/style.css">
@@ -17,6 +18,14 @@
      
   <body>
     <div class="everything">
+      <button id="modalButton">What is this?</div>
+      <div id="explanation">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p>These D3 pie graphs are simulated data from email responses. Revealing essential data to show how to optimize continued email outreach. </p>
+          <p>This hubspot is meant for me to access essential data to getting revealing information</p>
+        </div>
+      </div>
       <div class="navbar">
           <button type="button" id="refresh-btn">Refresh data</button>
         <div class="socials">
@@ -25,9 +34,9 @@
         </div>
       </div>
       <div class="main-content">
-        <h1 class="welcome-headline">Hello Manny</h1>
+        <h1 class="welcome-headline">Job Search Activity Hub</h1>
         <div class="chart-section">
-          <h3 class="section-title">Application Stats:</h3>
+          <h3 class="section-title">ClearBit response rate</h3>
           <div id="donut-charts"></div>
         </div>
         <div class="to-do-section">
