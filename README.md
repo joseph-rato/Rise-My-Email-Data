@@ -1,4 +1,4 @@
-[Live Page] (https://joseph-rato.github.io/Rise-My-Email-Data/)
+[Live Page](https://joseph-rato.github.io/Rise-My-Email-Data/)
 
 # Overview 
 
