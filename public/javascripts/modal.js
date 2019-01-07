@@ -1,11 +1,12 @@
-var modal = document.getElementById('explanation');
-
-var btn = document.getElementById("modalButton");
-
-var span = document.getElementsByClassName("close")[0];
+let modal = document.getElementById('explanation');
+console.log(modal)
+let explainBut = document.getElementById("modalButton");
+console.log(explainBut)
+let span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal 
-btn.onclick = function() {
+explainBut.onclick = function() {
+    console.log("done")
   modal.style.display = "flex";
 }
 
