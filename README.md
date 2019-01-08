@@ -1,6 +1,9 @@
-[Live Link](https://joseph-rato.github.io/Rise-My-Email-Data/)
+
+[Live Page](https://joseph-rato.github.io/Rise-My-Email-Data/)
+>>>>>>> 40c6efe0091995c4f35cdc91548af0ca3c8e827e
 
 # Overview 
+
 I started my career as a SDR (sales development representative). We used an off brand CRM (not sales force), meaning I never got to experience the joys of interactive graphs representing my email response data. Now that I can build what I want to see I’m making my own type of crm to make applying to work efficient by using data generated myself!
 
 # Mvps 
