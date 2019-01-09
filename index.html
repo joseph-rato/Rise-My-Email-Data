@@ -17,33 +17,64 @@
      
   <body>
     <div class="everything">
-      <button id="modalButton">What is this?</div>
-      <div id="explanation" class="modal">
-        <div class="modal-content">
-          <span class="close">&times;</span>
-          <p>These D3 pie graphs are simulated data from email responses. Revealing essential data to show how to optimize continued email outreach. </p>
-          <p>This hubspot is meant for me to access essential data to getting revealing information</p>
+        <div id="explanation" class="modal">
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>These D3 pie graphs are simulated data from email responses. Revealing essential data to show how to optimize continued email outreach. </p>
+            <p>This hubspot is meant for me to access essential data to getting revealing information about how my outreach is working</p>
+            <p>The main goal of this project was to learn how to utalize d3 graphs to make looking at data stimulating.
+              However, to make this a fully opperational app I plan to implement a google auth section allowing to connect to your gmail and then setup a synthesiser to read and evaluate emails.
+            </p>
+            <p>During my time at my last job I realized how important it is for engineers to have a quick feedback loop with customers allowing for needed features to come out quickly. 
+              This goal can be easily accomplished if the right system or people are in place. When communicating clearly with users or using apps like appSee or FullStory to modify and correct your platform it can allow for amazing user experiance
+              I don't have any users on this site however I know what I needed while I was a sales rep and I am trying to create those tools that I needed. 
+            </p>
+          </div>
         </div>
-      </div>
-      <div class="navbar">
-          <button type="button" id="refresh-btn">Refresh data</button>
-        <div class="socials">
-          <a href="https://www.linkedin.com/in/joseph-rato">Linkedin</a>
-          <a href="https://github.com/joseph-rato/RiseMyEmailData">Github</a>
+        <div id="graphExplanation" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p>From left to right the graphs are:</p> 
+                <li> <b>response</b> it tells email response disposition</li>
+                <li>  <b>days</b> it tells how many days it took to respond</li>
+                <li>  <b>attempts</b>how many touches it took to get a response</li>
+              <p>When I was a sales development representative, we did not have the sales force brand CRM. We were asked to
+                Write everything in a excell sheet, as a result I never was able to see my data in a consumable manner. 
+                I decided for this mini project to create a few graphsto show the desired data.</p>
+                <p>The <b>response</b> graph shows me the positive and negative responses of my outgoing emails for inqueries about positions.
+                The <b>days</b> graph labeled days is for days it takes to respond, to let the user either realize responses are not instant or to realize faster something is wrong with his methods.
+                The <b>attempts</b> graph is for how many emails it took to get a response. If you've done sales most sales reps are encouraged to ask the same person multiple times to build a rapport with them.
+              </p>
+            </div>
         </div>
-      </div>
-      <div class="main-content">
+        <div id="refreshExplanation" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p>The refresh button is for recreating the data and watching the changing annimation. The reason I made this animation is for in the future I'll have this automatically updating the pie graphs when a certain threshold of new data is achieved.</p>
+            </div>
+        </div>
+
         <h1 class="welcome-headline">Job Search Activity Hub</h1>
+        <button id="modalButton">What is this?</div>
         <div class="chart-section">
-          <h3 class="section-title">ClearBit response rate</h3>
+          <h3 class="section-title">ClearBit Response Data</h3>
           <div id="donut-charts"></div>
+          <button id="modalButtonCharts">What are these charts?</button>
         </div>
         <div class="to-do-section">
-          <h3 class="section-title">To do list</h3>
+          <h3 class="section-title">To Do App</h3>
           <a class="link-to-do" href="https://tango-app.herokuapp.com/#/splash">To the Tango App</a>
         </div>
       </div>
     </div>
+    <section class="footer">
+        <button type="button" id="refresh-btn">Refresh data</button>
+        <button id="modalButtonRefresh">What is this for</button>
+        <div class="socials">
+          <a href="https://www.linkedin.com/in/joseph-rato">Linkedin</a>
+          <a href="https://github.com/joseph-rato/RiseMyEmailData">Github</a>
+        </div>
+    </section>
   </body>
   <footer>
       <script type="text/javascript" src="./public/javascripts/modal.js"></script>
