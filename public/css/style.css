@@ -229,3 +229,24 @@ a:visited{
     color: blue;
     font-size: 50px;
 }
+
+
+#iframe-wrap{
+    margin: 5px 50px;
+    height: 300px;
+    width: 100%;
+    padding: 0; 
+    overflow: hidden;
+    border: 1px pink solid;
+}
+
+#tango-iframe{
+    width: 500px; 
+    height: 300px; 
+    border: 1px solid black;
+}
+#tango-iframe{
+    zoom: 1.5; 
+    -webkit-transform: scale(0.70); 
+    -webkit-transform-origin: 0 0;
+}
