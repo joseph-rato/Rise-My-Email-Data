@@ -134,7 +134,6 @@ body {
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
     background-color: rgba(0,0,0,0.4);
 
 }
@@ -142,6 +141,7 @@ body {
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto; /* 15% from the top and centered */
+    height: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
@@ -157,4 +157,63 @@ body {
     color: black;
     text-decoration: none;
     cursor: pointer;   
+}
+
+.refresh-tool {
+    display: flex;
+    margin-left: 40px;
+    margin-top: 10px;
+}
+
+.links-title {
+    font-size: 30px;
+    display: flex;
+    margin: 0px 50px;
+    justify-content: flex-start;
+    padding-bottom: 5px;
+    border-bottom: 3px solid;
+}
+
+.useful-tools{
+    display: flex;
+    flex-direction: row;
+    
+}
+.to-do-section{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.useful-links{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+#modalButtonRefresh{
+    border: none;
+    padding-top: 16px;
+}
+
+.photo-logo{
+    margin-left: 50px;
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+
+}
+
+.link-option {
+    display: flex;
+    margin: 15px, 0px;
+    align-items: center;
+}
+
+.link-option{
+    margin: 10px;
+    text-decoration: none;
+}
+
+a:visited{
+    text-decoration: none;
 }

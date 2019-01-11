@@ -263,11 +263,9 @@
         this.create = function(dataset) {
             holyData = dataset
             let $charts = $('#donut-charts');
-            console.log($charts.innerWidth())
             chart_m = $charts.innerWidth() / dataset.length / 2 * 0.14;
             chart_r = $charts.innerWidth() / dataset.length / 2 * 0.85;
-            console.log(`${chart_m}`)
-            console.log(`${chart_r}`)
+
 
             charts.append('svg')
                 .attr('class', 'legend')

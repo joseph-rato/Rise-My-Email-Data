@@ -7,6 +7,7 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" type="text/css" href="./public/css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
@@ -58,18 +59,45 @@
         <button id="modalButton">What is this?</div>
         <div class="chart-section">
           <h3 class="section-title">ClearBit Response Data</h3>
+            <div class="refresh-tool">
+              <button type="button" id="refresh-btn">Refresh data</button>
+              <button id="modalButtonRefresh"><i class="far fa-question-circle"></i></button>
+            </div>
           <div id="donut-charts"></div>
           <button id="modalButtonCharts">What are these charts?</button>
         </div>
-        <div class="to-do-section">
-          <h3 class="section-title">To Do App</h3>
-          <a class="link-to-do" href="https://tango-app.herokuapp.com/#/splash">To the Tango App</a>
+        <div class="useful-tools">
+          <div class="to-do-section">
+            <h3 class="section-title">To Do App</h3>
+            <a class="link-to-do" href="https://tango-app.herokuapp.com/#/splash">To the Tango App</a>
+          </div>
+          <div class="useful-links">
+            <h3 class="links-title">Links to Important Website</h3> 
+            <div class="linkedin-option link-option">
+              <i class="photo-logo fab fa-linkedin"></i>
+              <a class="link-option" href="https://www.linkedin.com">Linkedin</a>
+            </div>
+            <div class="glassdoor-option link-option">
+              <img src="db/assets/glassdoorLogo.png" class="photo-logo" alt="glassdoor">
+              <a class="link-option" href="https://www.glassdoor.com">GlassDoor</a>
+            </div>
+            <div class="angellist-option link-option">
+              <i class="photo-logo fab fa-angellist"></i>
+              <a class="link-option" href="https://angel.co/">AngelList</a>
+            </div>
+            <div class="appacademy-option link-option">
+              <img src="db/assets/appAcademyLogo.jpg" class="photo-logo" alt="appacademy">
+              <a class="link-option" href="https://progress.appacademy.io/me">AppAcademy</a>
+            </div>
+            <div class="interviewDB-option link-option">
+                <i class="photo-logo far fa-clock"></i>
+              <a class="link-option" href="https://www.interview-db.com/">InterviewDB</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <section class="footer">
-        <button type="button" id="refresh-btn">Refresh data</button>
-        <button id="modalButtonRefresh">What is this for</button>
         <div class="socials">
           <a href="https://www.linkedin.com/in/joseph-rato">Linkedin</a>
           <a href="https://github.com/joseph-rato/RiseMyEmailData">Github</a>
