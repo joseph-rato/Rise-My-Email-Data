@@ -271,7 +271,7 @@
                 .attr('class', 'legend')
                 .attr('width', '100%')
                 .attr('height', 50)
-                .attr('transform', 'translate(0, 500)');
+                .attr('transform', 'translate(0, 530)');
 
             let donut = charts.selectAll('.donut')
                             .data(dataset)
