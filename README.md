@@ -1,28 +1,39 @@
+Webpack 4 Boilerplate
+===========
 
-[Live Page](https://joseph-rato.github.io/Rise-My-Email-Data/)
->>>>>>> 40c6efe0091995c4f35cdc91548af0ca3c8e827e
+[![Dependency Status](https://david-dm.org/cvgellhorn/webpack-boilerplate.svg)](https://david-dm.org/cvgellhorn/webpack-boilerplate) 
+[![devDependency Status](https://david-dm.org/cvgellhorn/webpack-boilerplate/dev-status.svg)](https://david-dm.org/cvgellhorn/webpack-boilerplate)
 
-# Overview 
+> Plain webpack 4 boilerplate with Babel, SASS and lodash on board
 
-I started my career as a SDR (sales development representative). We used an off brand CRM (not sales force), meaning I never got to experience the joys of interactive graphs representing my email response data. Now that I can build what I want to see I’m making my own type of crm to make applying to work efficient by using data generated myself!
+## Requirements
+You only need <b>node.js</b> pre-installed and you’re good to go. 
 
-# Mvps 
-[] three pie charts that show email response data
-[] Links to desirable pages set up
-[] Google api email api set up
-[] Sentimental package reading email body
+If you don’t want to work with lodash, just remove it from the node packages and the webpack config.
 
-# Timeline 
-Day 1 
-understand d3
-Day 2 
-build d3 charts
-Day 3 
-get gmail api to pull data
-Day 4 
-use sentiment package to read body of email
-Day 5 
-get pulled data to reflect on pie
-Day 6 stylize and refactor
+## Download
+Download in current directory
+```sh
+$ curl -L -o master.zip https://github.com/cvgellhorn/webpack-boilerplate/archive/master.zip && unzip master.zip && rm master.zip && mv ./webpack-boilerplate-master/{.,}* ./ && rm -r ./webpack-boilerplate-master
+```
 
-Wireframe 
+## Setup
+Install dependencies
+```sh
+$ npm install
+```
+
+## Development
+Run the local webpack-dev-server with livereload and autocompile on [http://localhost:8080/](http://localhost:8080/)
+```sh
+$ npm run dev
+```
+## Deployment
+Build the current application
+```sh
+$ npm run build
+```
+
+## [webpack](https://webpack.js.org/)
+If you're not familiar with webpack, the [webpack-dev-server](https://webpack.js.org/configuration/dev-server/) will serve the static files in your build folder and watch your source files for changes.
+When changes are made the bundle will be recompiled. This modified bundle is served from memory at the relative path specified in publicPath.

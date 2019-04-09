@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    
+</head>
+<body>
+    <div id="content">
+        <form id="politician-search">
+            <input id="zipcode_request" type="text" name="zipcode" value="" placeholder="Zipcode"/> 
+
+            <button id="startButton" type="submit">Find Representatives</button>
+        </form>
+        <p id="maybehere"></p>
+        
+        <h2>Location Graph</h2>
+        <h1>DONUT CHARTS</h1>
+        <div id="donut-charts"></div>
+        <h1>LINE GRAPH</h1>
+    </div>
+    <script async defer src="https://apis.google.com/js/api.js"
+      onload="this.onload=function(){};gapi.load('client')"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+</body>
+</html>
