@@ -1,4 +1,4 @@
-import {gmailSecretkey} from '../secret-key'
+import {gmailSecretkey, proPublicaKey} from '../secret-key'
 
 /**
  * Application entry point
@@ -6,6 +6,7 @@ import {gmailSecretkey} from '../secret-key'
 
 // Load application styles
 import 'styles/index.scss';
+import { get } from 'https';
 
 // ================================
 // START YOUR APP HERE
@@ -66,13 +67,35 @@ function solvePeopleResults(response){
             districts.push(stateDistrict[i].slice(36, 39))
         }
     }
-    return getPotentialReps(state, districts)
-    console.log(state)
-    console.log(districts)
+    return getPotentialReps(politicians)
+    // console.log(state)
+    // console.log(districts)
     // if (response.hasOwnProperty('ocd-division/country:us/state'))
     // console.log(stateDistrict)
 }
 
-function getPotentialReps(state, districts){
+function listPotentialReps(politicians, urlCreation){
     
+}
+function createProPublicaURL(){
+
+}
+
+function getPotentialReps(state, districts){
+    let request = new XMLHttpRequest();
+    let newUrls = createProPublicaURL(state, districts)
+    request.onreadystatechange = function(){
+        if (this.readyState === 4){
+            if(this.status === 200){
+                document.body.className = 'ok';
+                console.log(this.responseText)
+            } else if (this.response == null && this.status === 0){
+                document.body.className = 'error offline';
+                console.log('something is down')
+            }
+        }
+    }
+    // need to do a for loop for each of these urls so that we can get responses for each of them
+    // the question Cory askedearlier about await and then you go through each would be useful here
+    reequest.open("GET", )
 }
